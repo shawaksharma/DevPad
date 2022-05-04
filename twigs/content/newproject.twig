@@ -1,0 +1,32 @@
+{% extends '@content/page.twig' %}
+
+{% import '@util/formmacro.twig' as f %}
+
+{% set title = context.user.login ~ ' - New Project' %}
+
+{% set breadcrumbs = [{link: base ~ '/' , text: 'Home'} , {text: 'New Project'}] %}
+
+{% block main %}
+    <section class="row">
+        <article class="col-md-12 mt-5">
+            <div class="box">
+                <div class="box-heading">
+                    <br><br>
+                    <h1>New Project</h1>
+                    <br>
+                </div>
+                <div class="box-body">
+                    {% include '@util/message.twig' %}
+                    {{f.startform({method: 'post', id: 'prform'})}}
+                        {{f.text({label: 'Project Name', name: 'name', ph: 'Project Name'})}}
+                        {{f.textarea({label: 'Poject Description', name: 'description', ph: 'Description'})}}
+                        {{f.submit({value: 'Create'})}}
+                    {{f.endform()}}
+                </div>
+            </div>
+        </article>
+    </section>
+{% endblock main %}
+
+{% block pagefooter %}
+{% endblock pagefooter %}

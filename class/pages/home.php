@@ -9,7 +9,7 @@
   */
     namespace Pages;
 
-    use \Support\Context;
+    use \Support\Context as Context;
 /**
  * A class that contains code to implement a home page
  * @psalm-suppress UnusedClass
@@ -26,6 +26,12 @@
  */
         public function handle(Context $context)
         {
+            // Find all projects and order them by name
+            $projects = \R::findAll('project', 'ORDER BY name');
+
+            // Send to twig
+            $context->local()->addval('projects',$projects);
+            
             return '@content/index.twig';
         }
     }

@@ -31,7 +31,7 @@
  */
         public static function pwValid(string $pw) : bool
         {
-            return $pw !== '';
+            return strlen($pw) >= 8;
         }
 /**
  * Do any extra registration stuff

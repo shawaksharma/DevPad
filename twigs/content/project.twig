@@ -1,0 +1,45 @@
+{% extends '@content/page.twig' %}
+
+{% set title = 'Project - ' ~ project.name %}
+
+{% set breadcrumbs = [{link: base ~ '/' , text: 'Home'} , {text: project.name}] %}
+
+{% block header %}
+    <article class="col-md-12">
+        <br><br>
+        <h1 class="text-left display-4 mt-5 mb-3">{{project.name}}</h1>
+        <h5 class="text-left text-muted mb-2">{{project.description}}</h5>
+        <p class="text-right text-muted"><i> Created: {{project.time}}</i></p>
+    </article>
+{% endblock header %}
+
+{% block main %}
+    <section class="row">
+        <aside class="col mt-5">
+            <h2 class="float-left mt-3">Notes</h2>
+            <a href="{{base}}/newnote/{{project.id}}" class="btn btn-lg btn-info p-3 float-right" type="button" >New Note</a>
+        </aside>
+    </section>
+    <section class="row">
+        <article class="col-md-12 mt-3">
+            <div class="jumbotron">
+                {% for note in notes %}
+                    <div class="col-md-12">
+                        <div class="card mb-2">
+                            <div class="card-body">
+                                <p class="text-right text-muted"><i> Created: {{note.time}}</i></p>
+                                <h5 class="card-title"><b>{{note.title}}</b></h5>
+                                <p class="card-text">{{note.content}}</p>
+                                <a class="card-text btn btn-danger float-right" href="{{base}}/note/{{note.id}}/delete">Remove</a>
+                                <a class="card-text btn btn-info float-right mr-2" href="{{base}}/note/{{note.id}}">Open</a>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </article>
+    </section>
+{% endblock main %}
+
+{% block pagefooter %}
+{% endblock pagefooter %}

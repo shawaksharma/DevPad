@@ -1,36 +1,46 @@
+{% set keywords = 'Devpad, Project, Developer, Notes' %}
+
 {% extends '@content/page.twig' %}
 
-{% block onload %}
-    $('#alert').on('click', function(){
-        bootbox.alert('Hello World')
-    })
-{% endblock onload %}
+{% set title = context.user.login ~ ' - Home' %}
+
+{% set breadcrumbs = [{link: base ~ '/' , text: 'Home'}] %}
 
 {% block header %}
     <section class="col-md-12 mt-5">
-        <h1 class="text-center">Header</h1>
+        <br><br>
+        <h1 class="text-left display-4">Welcome Back, {{context.user.login}}</h1>
+        <hr>
     </section>
 {% endblock header %}
 
 {% block main %}
     <section class="row">
-        <aside class="col">
-            <p>Left</p>
+        <aside class="col mt-3">
+            <h2 class="float-left mt-3">Projects</h2>
+            <a href="{{base}}/newproject/" class="btn btn-lg btn-info p-3 float-right" type="button" >New Project</a>
         </aside>
-        <article class="col-md-8">
+    </section>
+    <section class="row">
+        <article class="col-md-12 mt-3">
             <div class="jumbotron">
-                This is the middle column
+                {% for project in projects %}
+                    <div class="col-md-12">
+                        <div class="card mb-2">
+                            <div class="card-body">
+                                <p class="text-right text-muted"><i> Created: {{project.time}}</i></p>
+                                <h5 class="card-title"><b>{{project.name}}</b></h5>
+                                <p class="card-text">{{project.description}}</p>
+                                <a class="card-text btn btn-danger float-right" href="{{base}}/project/{{project.id}}/delete">Remove</a>
+                                <a class="card-text btn btn-info float-right mr-2" href="{{base}}/project/{{project.id}}">Open</a>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
             </div>
-            <button id="alert" class="btn btn-lg btn-info" type="button">Alert</button>
         </article>
-        <aside id="rightbar" class="col">
-            <p>Right</p>
-        </aside>
     </section>
 {% endblock main %}
 
 {% block footer %}
-    <section class="col-md-12">
-        <p class="text-center">Footer</p>
-    </section>
 {% endblock footer %}

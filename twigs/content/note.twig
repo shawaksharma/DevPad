@@ -1,0 +1,30 @@
+{% extends '@content/page.twig' %}
+
+{% set title = 'Note - ' ~ note.title %}
+
+{% set breadcrumbs = [{link: base ~ '/' , text: 'Home'} , {link: base ~ '/project/' ~ note.projectID, text: 'Project'} ,  {text: note.title}] %}
+
+{% block header %}
+    <article class="col-md-12">
+        <br><br>
+        <h1 class="text-left display-4 mt-5 mb-3">{{note.title}}</h1>
+        <p class="text-right text-muted"><i> Created: {{note.time}}</i></p>
+    </article>
+{% endblock header %}
+
+{% block main %}
+    <section class="row">
+        <aside class="col mt-5">
+        </aside>
+    </section>
+    <section class="row">
+        <article class="col-md-12 mt-3">
+            <div class="jumbotron">
+            <p class="text-left">{{note.content}}</p>
+            </div>
+        </article>
+    </section>
+{% endblock main %}
+
+{% block pagefooter %}
+{% endblock pagefooter %}
